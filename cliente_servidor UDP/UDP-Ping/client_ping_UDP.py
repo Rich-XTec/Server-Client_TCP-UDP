@@ -1,4 +1,5 @@
 import socket
+import time
 
 # Configurações do servidor
 IP_SERVIDOR = "192.168.3.39"
@@ -18,11 +19,13 @@ for i in range(1, 11):
 
         # Recebe a resposta
         resposta, _ = cliente_socket.recvfrom(1024)
-
+        print("Resposta do servidor:", resposta.decode())
+              
         end_time = time.time()  # Marca o tempo de recebimento
         rtt = (end_time - start_time) * 1000  # RTT em milissegundos
-
-        print("Resposta do servidor:", resposta.decode(), "RTT: ", rtt)
+        rtt_rounded = round(rtt,2)
+        
+        print("RTT: ", rtt_rounded, "ms\n")
 
     except socket.timeout:
         print(f"Ping {i}: tempo esgotado (timeout)")
